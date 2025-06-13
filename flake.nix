@@ -26,7 +26,7 @@
         };
         userSettings = {
            username = "frisch";
-           theme = "gruvbox"; # options: gruvbox, solarized, pinkish (see /themes)
+           theme = "pinkish"; # options: gruvbox, solarized, pinkish (see /themes)
            wm = "sway"; # options: sway
            browser = "chromium"; # options: chromium
            terminal = "alacritty";

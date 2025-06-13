@@ -3,7 +3,7 @@
 let
   themePath = ../themes/${userSettings.theme};
   colors = import (themePath + "/colors.nix");
-  wallpaper = themePath + "/wallpaper.png";
+  wallpaper = themePath + "/wallpaper.jpg";
 in
 {
   stylix = {
@@ -22,7 +22,7 @@ in
     };
 
     opacity = {
-      terminal = 0.9;
+      terminal = 0.8;
     };
 
     fonts = {
