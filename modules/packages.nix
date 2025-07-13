@@ -15,5 +15,8 @@
     ranger
     gimp3
     feh
+    podman
+    firefox
+    eas-cli
   ];
 }

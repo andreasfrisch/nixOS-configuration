@@ -8,6 +8,7 @@ let
     modules-right = [
       #"network"
       "bluetooth"
+      "backlight"
       "pulseaudio"
       "battery"
       "memory"
@@ -40,6 +41,16 @@ let
       on-click = "pavucontrol";
     };
 
+    backlight = {
+      device = "intel_backlight";
+      format = "{icon} {percent}%";
+      format-icons = {
+        default = [ "" ];
+      };
+      #on-scroll-up = "brightnessctl set +5%";
+      #on-scroll-down = "brightnessctl set 5%-";
+    };
+
     battery = {
       format = "{icon} {capacity}%";
       format-charging = " {capacity}%";
@@ -70,7 +81,7 @@ let
   };
 
   waybarStyle = ''
-    #clock, #network, #pulseaudio, #battery, #memory, #cpu, #disk #tray {
+    #clock, #network, #pulseaudio, #backlight, #battery, #memory, #cpu, #disk #tray {
       padding: 0 10px;
     }
 

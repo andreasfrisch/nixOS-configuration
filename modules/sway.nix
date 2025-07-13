@@ -56,9 +56,6 @@
       bindsym XF86AudioRaiseVolume exec pamixer -i 5
       bindsym XF86AudioLowerVolume exec pamixer -d 5
       bindsym XF86AudioMute exec pamixer -t
-
-      bindsym XF86Bluetooth exec bluetoothctl power toggle
     '';
   };
-
 }

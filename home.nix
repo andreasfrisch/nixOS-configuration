@@ -6,7 +6,6 @@
   home.username = "frisch";
   home.homeDirectory = "/home/frisch";
 
-
   imports = [
     stylix.homeModules.stylix
     ./modules/stylix.nix
@@ -72,6 +71,7 @@
       package = pkgs.papirus-icon-theme;
     };
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
