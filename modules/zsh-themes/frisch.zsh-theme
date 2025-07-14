@@ -65,7 +65,7 @@ function mygit() {
 
   # Clean working tree icon if no changes
   if [[ -z "$status_str" ]]; then
-    status_str="%{$fg[green]%}✔%{$reset_color%}"
+    status_str=" %{$fg[green]%}✔%{$reset_color%}"
   fi
 
   echo "%{\e[0;34m%}%B[git:${branch}${status_str}%{$reset_color%}%{\e[0;34m%}%B]"
