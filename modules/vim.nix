@@ -12,6 +12,7 @@
       vim-flake8
       vim-nix
       vim-devicons
+      vim-indent-object
     ];
 
     extraConfig = ''
@@ -89,27 +90,8 @@
       " make F search for the word under the cursor
       nnoremap F *
 
-      " make space select indentation block
-      function! SelectIndentBlock()
-      let l:cur_indent = indent('.')
-      let l:start = line('.')
-      let l:end = line('.')
-      let l:last = line('$')
-
-      " Extend upwards while indent >= current (ignore blank line content)
-      while l:start > 1 && (indent(l:start - 1) >= l:cur_indent || getline(l:start - 1) =~ '^\s*$')
-      let l:start -= 1
-      endwhile
-
-      " Extend downwards while indent >= current (ignore blank line content)
-      while l:end < l:last && (indent(l:end + 1) >= l:cur_indent || getline(l:end + 1) =~ '^\s*$')
-      let l:end += 1
-      endwhile
-
-      execute l:start . ',' . l:end . 'normal! V'
-      endfunction
-
-      nnoremap <silent> <Space> :call SelectIndentBlock()<CR>
+      " make space select indentation
+      nnoremap <Space> :call feedkeys("vii")<CR>
     '';
   };
 }
