@@ -69,8 +69,8 @@
 
       # Charge thresholds (only available on ThinkPads)
       # Keep battery between 40-80% to preserve battery lifespan
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT0 = 85;
+      STOP_CHARGE_THRESH_BAT0 = 90;
 
       # Runtime Power Management
       RUNTIME_PM_ON_AC = "auto";

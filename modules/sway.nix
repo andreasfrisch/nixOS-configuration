@@ -38,9 +38,9 @@
       };
     };
     extraConfig = ''
-      bindsym Print               exec shotman -c output
-      bindsym Print+Shift         exec shotman -c region
-      bindsym Print+Shift+Control exec shotman -c window
+      bindsym Print               exec shotman -c output -C
+      bindsym Print+Shift         exec shotman -c region -C
+      bindsym Print+Shift+Control exec shotman -c window -i
 
       unbindsym Mod4+d
       bindsym Mod4+d exec fuzzel
