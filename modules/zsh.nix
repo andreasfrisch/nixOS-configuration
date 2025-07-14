@@ -16,13 +16,13 @@ in {
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "virtualenv" ]; # include others if you want
-      theme = ""; # We're overriding the theme manually below
+      plugins = [ "git" "virtualenv" ];
+      theme = "";
     };
 
     shellAliases = {
-       ls = "eza --icons";
-       ll = "eza --icons -l -T -L=1";
+       ls = "eza --icons -a";
+       ll = "eza --icons -a -l -T -L=1";
        tree = "eza --icons -T";
        open = "ranger";
     };
