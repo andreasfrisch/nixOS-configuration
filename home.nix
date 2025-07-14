@@ -18,6 +18,7 @@
   ];
 
   home.sessionVariables = {
+    BROWSER = userSettings.browser;
     EDITOR = userSettings.editor;
     VISUAL = userSettings.editor;
     TERM = userSettings.terminal;
@@ -77,6 +78,13 @@
       enable = true;
       enableZshIntegration = true; # see note on other shells below
       nix-direnv.enable = true;
+    };
+  };
+
+  programs.ranger = {
+    enable = true;
+    settings = {
+      show_hidden = true;
     };
   };
 

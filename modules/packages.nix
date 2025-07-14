@@ -12,7 +12,6 @@
     feh
     curl
     kubectl
-    ranger
     gimp3
     feh
     podman
