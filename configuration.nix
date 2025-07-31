@@ -28,6 +28,8 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  services.udev.packages = [ pkgs.qmk-udev-rules ];
+
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -159,10 +161,26 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
+  ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    ifuse
+    libimobiledevice
+    usbmuxd
+  ];
 
   environment.shells = with pkgs; [zsh];
   programs.zsh.enable = true;

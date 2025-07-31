@@ -14,7 +14,16 @@
 
   programs.swaylock = {
     enable = true;
-    settings.image = config.stylix.image;
+    package = pkgs.swaylock-effects;
+    settings = {
+      image = config.stylix.image;
+      clock = true;
+      indicator-idle-visible = true;
+      indicator-radius = 100;
+      indicator-thickness = 7;
+      timestr = "%H:%M";
+      datestr = "%d %B";
+    };
   };
 
   wayland.windowManager.sway = {

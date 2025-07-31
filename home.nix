@@ -15,6 +15,7 @@
     ./modules/sway.nix
     ./modules/waybar.nix
     ./modules/packages.nix
+    ./modules/setupenv.nix
   ];
 
   home.sessionVariables = {
