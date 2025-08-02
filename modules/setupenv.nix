@@ -11,9 +11,7 @@ let
 
     ENV_NAME="$1"
 
-    echo "use flake \"github:andreasfrisch/nix-environments#$ENV_NAME\"" >> .envrc
-
-    echo ".envrc written for $ENV_NAME"
+    nix flake init -t "github:andreasfrisch/nix-environments#$1"
     direnv allow
   '';
 in {
