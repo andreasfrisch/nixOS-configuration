@@ -33,6 +33,7 @@
            editor = "vim";
            font = "JetBrainsMono Nerd Font";
            fontPkg = pkgs.nerd-fonts.jetbrains-mono;
+           templateRepository = "andreasfrisch/nix-environments";
         };
 
         lib = nixpkgs.lib;
