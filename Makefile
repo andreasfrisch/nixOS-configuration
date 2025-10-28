@@ -1,14 +1,22 @@
 default: help
 
-.PHONY: install-home-manager
-install-home-manager:  ## install home-manager
+.PHONY: setup-hardware-config
+setup-hardware-config:  ## copy local hardware config
+	cp /etc/nixos/hardware-configuration.nix .
+
+.PHONY: setup-flakes
+setup-flakes:  ## setup flakes in the current shell
+	NIX_CONFIG="experimental-features = nix-command flakes" nix flake update
+
+.PHONY: setup-home-manager
+setup-home-manager:  ## install home-manager
 	nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 
 .PHONY: system
-system:  ## reload system settings
-	sudo nixos-rebuild switch --flake .
+system:  ## build and apply system settings
+	sudo nixos-rebuild switch --flake .#castitas
 
 .PHONY: home
 home:  ## reload home settings
@@ -22,6 +30,9 @@ nixos-size:  ## check top 20 size consuming entries
 garbage-collect:  ## collect nixOS and home manager generations
 	sudo nix-collect-garbage -d
 	home-manager expire-generations '-3 days'
+
+.PHONY: init
+init: setup-hardware-config setup-flakes setup-home-manager system home  ## setup from scratch
 
 .PHONY: help
 help: ## Shows this list
