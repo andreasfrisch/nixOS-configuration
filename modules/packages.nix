@@ -1,9 +1,10 @@
 { config, pkgs, userSettings, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     gnumake
-    git
     wget
     neofetch
     htop
@@ -17,5 +18,9 @@
     podman
     firefox
     eas-cli
+    slack
+    discord
+    cage
+    openscad
   ];
 }

@@ -9,15 +9,9 @@ On a fresh install of NixOS, start a `nix-shell` with git
 Then clone this repository into `/home/user/<username>/.dotfiles` or wherever you prefer.
 From here you can run
 
-> make install-home-manager
+> make init
 
-Followed by
-
-> make system
-
-Followed by
-
-> make home
+This setup everything in the right order.
 
 ## Configurations
 
@@ -25,6 +19,8 @@ Followed by
 Most importantly `hostname`, `timezone`, `locale`, and `username`.
 
 A few of the other settings are not yet true settings.
+
+If you modify the `hostname` remember to change the reference in the Makefile as well.
 
 ## Custom theming
 

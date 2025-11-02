@@ -13,9 +13,11 @@
     ./modules/zsh.nix
     ./modules/alacritty.nix
     ./modules/sway.nix
+    ./modules/git.nix
     ./modules/waybar.nix
     ./modules/packages.nix
     ./modules/setupenv.nix
+    ./modules/flatpaks.nix
   ];
 
   home.sessionVariables = {
@@ -89,6 +91,9 @@
     };
   };
 
+  home.sessionVariables = {
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

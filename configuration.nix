@@ -151,12 +151,7 @@
     isNormalUser = true;
     description = "Andreas Frisch";
     extraGroups = [ "networkmanager" "wheel" "bluetooth" ];
-    packages = with pkgs; [
-       slack
-       discord
-       chromium
-       cage
-    ];
+    packages = with pkgs; [];
   };
 
   # Allow unfree packages
@@ -198,6 +193,20 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+
+  # Flatpak enabling
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = "wlr";
+  };
+  services.flatpak = {
+    enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
