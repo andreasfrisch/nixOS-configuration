@@ -11,7 +11,6 @@
     htop
     jq
     imagemagick
-    feh
     curl
     kubectl
     gimp3

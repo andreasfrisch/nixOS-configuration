@@ -46,6 +46,7 @@
           config = {
             allowUnfree = true;
           };
+          overlays = [ nix-vscode-extensions.overlays.default ];
         };
      in {
      nixosConfigurations = {

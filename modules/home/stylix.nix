@@ -1,7 +1,7 @@
 { pkgs, config, stylix, userSettings, ... }:
 
 let
-  themePath = ../themes/${userSettings.theme};
+  themePath = ../../themes/${userSettings.theme};
   colors = import (themePath + "/colors.nix");
   wallpaper = themePath + "/wallpaper.jpg";
 in

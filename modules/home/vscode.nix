@@ -1,10 +1,7 @@
-{ config, pkgs, nix-vscode-extensions, ... }:
+{ config, pkgs, ... }:
 
 let
-  # Shortcut for extensions (requires overlay enabled in your flake)
-  extensions = nix-vscode-extensions.lib.mkExtensions {
-    inherit pkgs;
-  };
+  exts = pkgs.vscode-extensions;
 in
 {
   programs.vscode = {
@@ -17,7 +14,7 @@ in
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
 
-      extensions = with extensions.vscode-marketplace; [
+      extensions = with exts; [
         # --- Core ---
         github.copilot
         github.copilot-chat
@@ -29,8 +26,7 @@ in
         # --- JS / React ---
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
-        ms-vscode.vscode-typescript-next
-
+        
         # --- React Native ---
         msjsdiag.vscode-react-native
 
@@ -58,6 +54,7 @@ in
           "plaintext" = false;
           "markdown" = true;
         };
+        "github.copilot.nextEditSuggestions.enabled" = true;
 
         # --- Python ---
         "python.defaultInterpreterPath" = "python";

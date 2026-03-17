@@ -8,7 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/greetd.nix
+      ./modules/system/greetd.nix
+      ./modules/system/wayland.nix
+      ./modules/system/gaming.nix
     ];
 
 
@@ -29,7 +31,7 @@
   # enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "castitas"; # Define your hostname.
+  networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -44,21 +46,21 @@
   services.upower.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Copenhagen";
+  time.timeZone = systemSettings.timezone;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
+  i18n.defaultLocale = systemSettings.defaultLocale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "da_DK.UTF-8";
-    LC_IDENTIFICATION = "da_DK.UTF-8";
-    LC_MEASUREMENT = "da_DK.UTF-8";
-    LC_MONETARY = "da_DK.UTF-8";
-    LC_NAME = "da_DK.UTF-8";
-    LC_NUMERIC = "da_DK.UTF-8";
-    LC_PAPER = "da_DK.UTF-8";
-    LC_TELEPHONE = "da_DK.UTF-8";
-    LC_TIME = "da_DK.UTF-8";
+    LC_ADDRESS = systemSettings.secondaryLocale;
+    LC_IDENTIFICATION = systemSettings.secondaryLocale;
+    LC_MEASUREMENT = systemSettings.secondaryLocale;
+    LC_MONETARY = systemSettings.secondaryLocale;
+    LC_NAME = systemSettings.secondaryLocale;
+    LC_NUMERIC = systemSettings.secondaryLocale;
+    LC_PAPER = systemSettings.secondaryLocale;
+    LC_TELEPHONE = systemSettings.secondaryLocale;
+    LC_TIME = systemSettings.secondaryLocale;
   };
 
   programs.dconf.enable = true;
@@ -189,20 +191,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-unwrapped"
-    "steam-run"
     "vscode"
     "vscode-extension-github-copilot"
     "vscode-extension-github-copilot-chat"
   ];
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

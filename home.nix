@@ -8,17 +8,18 @@
 
   imports = [
     stylix.homeModules.stylix
-    ./modules/stylix.nix
-    ./modules/vim.nix
-    ./modules/zsh.nix
-    ./modules/alacritty.nix
-    ./modules/sway.nix
-    ./modules/git.nix
-    ./modules/waybar.nix
-    ./modules/packages.nix
-    ./modules/setupenv.nix
-    ./modules/flatpaks.nix
-    ./modules/kanshi.nix
+    ./modules/home/stylix.nix
+    ./modules/home/vim.nix
+    ./modules/home/zsh.nix
+    ./modules/home/alacritty.nix
+    ./modules/home/sway.nix
+    ./modules/home/git.nix
+    ./modules/home/waybar.nix
+    ./modules/home/packages.nix
+    ./modules/home/setupenv.nix
+    ./modules/home/flatpaks.nix
+    ./modules/home/kanshi.nix
+    ./modules/home/vscode.nix
   ];
 
   home.sessionVariables = {
@@ -26,6 +27,7 @@
     EDITOR = userSettings.editor;
     VISUAL = userSettings.editor;
     TERM = userSettings.terminal;
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share";
   };
 
   # The home.packages option allows you to install Nix packages into your
@@ -37,9 +39,7 @@
     networkmanager_dmenu
     papirus-icon-theme
     hicolor-icon-theme
-    swaybg
     networkmanagerapplet
-    vscode
   ];
 
   fonts.fontconfig.enable = true;
@@ -92,10 +92,6 @@
     settings = {
       show_hidden = true;
     };
-  };
-
-  home.sessionVariables = {
-    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share";
   };
 
   # Let Home Manager install and manage itself.
