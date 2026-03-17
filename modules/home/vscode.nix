@@ -27,9 +27,6 @@ in
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
         
-        # --- React Native ---
-        msjsdiag.vscode-react-native
-
         # --- Docker ---
         ms-azuretools.vscode-docker
 
