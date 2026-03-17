@@ -39,6 +39,8 @@ let
         default = [ "" "" "" ];
       };
       on-click = "pavucontrol";
+      on-click-right = "wpctl status | wofi --dmenu | awk '{print $1}' | xargs -r wpctl set-default";
+      scroll-step = 5;
     };
 
     backlight = {

@@ -7,6 +7,8 @@ let
   # List of desired Flatpaks
   flatpakApps = [
     "com.bambulab.BambuStudio"
+    "com.usebottles.bottles"
+    "net.openra.OpenRA"
   ];
 
   # Function to generate installation commands

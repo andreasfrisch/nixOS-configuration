@@ -13,9 +13,13 @@
         url = "github:danth/stylix/release-25.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      nix-vscode-extensions = {
+        url = "github:nix-community/nix-vscode-extensions";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
    };
 
-   outputs = { self, nixpkgs, home-manager, stylix, ...}:
+   outputs = { self, nixpkgs, home-manager, stylix, nix-vscode-extensions, ...}:
      let
         systemSettings = {
            system = "x86_64-linux";
@@ -26,7 +30,7 @@
         };
         userSettings = {
            username = "frisch";
-           theme = "pinkish"; # options: gruvbox, solarized, pinkish (see /themes)
+           theme = "gruvbox"; # options: gruvbox, solarized, pinkish (see /themes)
            wm = "sway"; # options: sway
            browser = "chromium"; # options: chromium
            terminal = "alacritty";
@@ -37,7 +41,12 @@
         };
 
         lib = nixpkgs.lib;
-        pkgs = nixpkgs.legacyPackages.${systemSettings.system};
+        pkgs = import nixpkgs {
+          system = systemSettings.system;
+          config = {
+            allowUnfree = true;
+          };
+        };
      in {
      nixosConfigurations = {
         castitas = lib.nixosSystem {

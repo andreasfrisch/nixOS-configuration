@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    chromium
     gnumake
     wget
     neofetch
@@ -22,5 +23,7 @@
     discord
     cage
     openscad
+    uv
+    mupdf
   ];
 }

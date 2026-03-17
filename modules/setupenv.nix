@@ -15,7 +15,7 @@ let
     REPO="${repository}"
     ENV_NAME="$1"
 
-    nix flake init -t "github:$REPO#$ENV_NAME"
+    nix flake init --refresh -t "github:$REPO#$ENV_NAME"
     direnv allow
   '';
 
@@ -24,7 +24,7 @@ let
     set -euo pipefail
 
     REPO="${repository}"
-    nix flake show "github:$REPO"
+    nix flake show --refresh "github:$REPO"
   '';
 in {
   home.file."bin/setupenv" = {

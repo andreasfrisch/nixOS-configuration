@@ -11,6 +11,17 @@
       ./modules/greetd.nix
     ];
 
+
+  # Automatic updating
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.dates = "weekly";
+
+  # Automatic cleanup
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 10d";
+  nix.settings.auto-optimise-store = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -30,6 +41,7 @@
 
   services.udev.packages = [ pkgs.qmk-udev-rules ];
 
+  services.upower.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -61,6 +73,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
 
   # battery management software
   services.tlp = {
@@ -129,6 +142,17 @@
     };
   };
 
+
+  virtualisation.containers.enable = true;
+
+  virtualisation.containers.policy = {
+    default = [
+      {
+        type = "insecureAcceptAnything";
+      }
+    ];
+  };
+
   environment.etc."bluetooth/main.conf".text = lib.mkForce ''
     [General]
     AutoEnable=false
@@ -150,7 +174,15 @@
   users.users.frisch = {
     isNormalUser = true;
     description = "Andreas Frisch";
-    extraGroups = [ "networkmanager" "wheel" "bluetooth" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "bluetooth"
+      "disk"
+      "storage"
+      "lp"
+      "lpadmin"
+    ];
     packages = with pkgs; [];
   };
 
@@ -161,6 +193,9 @@
     "steam-original"
     "steam-unwrapped"
     "steam-run"
+    "vscode"
+    "vscode-extension-github-copilot"
+    "vscode-extension-github-copilot-chat"
   ];
   programs.steam = {
     enable = true;
@@ -175,6 +210,13 @@
     ifuse
     libimobiledevice
     usbmuxd
+    rpi-imager
+    cups
+    cups-filters
+    ghostscript
+    wireplumber
+    pavucontrol
+    wofi
   ];
 
   environment.shells = with pkgs; [zsh];
@@ -194,6 +236,11 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
 
   # Flatpak enabling
   xdg.portal = {

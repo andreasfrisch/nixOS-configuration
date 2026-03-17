@@ -39,6 +39,10 @@
       bars = [];
       startup = [
          { command = "waybar"; }
+         {
+           command = ''sh -c "pkill -x kanshi 2>/dev/null || true; exec kanshi'';
+           always = true;
+         }
       ];
       gaps = {
         inner = 10;

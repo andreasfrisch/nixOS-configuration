@@ -18,6 +18,7 @@
     ./modules/packages.nix
     ./modules/setupenv.nix
     ./modules/flatpaks.nix
+    ./modules/kanshi.nix
   ];
 
   home.sessionVariables = {
@@ -35,8 +36,10 @@
     wl-clipboard
     networkmanager_dmenu
     papirus-icon-theme
+    hicolor-icon-theme
     swaybg
     networkmanagerapplet
+    vscode
   ];
 
   fonts.fontconfig.enable = true;
