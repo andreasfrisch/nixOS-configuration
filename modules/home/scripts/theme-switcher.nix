@@ -17,7 +17,7 @@ let
 
     # Show fuzzel picker — strip the icon+spaces prefix after selection
     chosen=$(printf "$themes" | ${pkgs.fuzzel}/bin/fuzzel --dmenu \
-      --prompt="Theme:" \
+      --prompt="Theme: " \
       --lines=3 \
       --width=20 | ${pkgs.gnused}/bin/sed 's/^.*  //')
 

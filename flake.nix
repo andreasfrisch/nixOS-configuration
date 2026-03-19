@@ -39,6 +39,7 @@
            editor = "vim";
            font = "JetBrainsMono Nerd Font";
            fontPkg = pkgs.nerd-fonts.jetbrains-mono;
+           iconTheme = "Papirus";
            templateRepository = "andreasfrisch/nix-environments";
         };
 
