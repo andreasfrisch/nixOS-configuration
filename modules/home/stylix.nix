@@ -1,7 +1,7 @@
-{ pkgs, config, stylix, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 let
-  themePath = ../themes/${userSettings.theme};
+  themePath = ../../themes/${userSettings.theme};
   colors = import (themePath + "/colors.nix");
   wallpaper = themePath + "/wallpaper.jpg";
 in
@@ -14,7 +14,6 @@ in
     image = wallpaper;
 
     targets = {
-      rofi.enable = true;
       alacritty.enable = true;
       waybar.enable = true;
       swaylock.enable = true;
@@ -39,7 +38,7 @@ in
         name = userSettings.font;
       };
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
     };

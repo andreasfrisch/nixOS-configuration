@@ -3,6 +3,7 @@
 {
   imports = [
     ./scripts/power-menu.nix
+    ./scripts/theme-switcher.nix
   ];
 
   home.packages = with pkgs; [
@@ -28,9 +29,9 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    config = rec {
+    config = {
       modifier = "Mod4";
-      terminal = "alacritty";
+      terminal = userSettings.terminal;
       input = {
         "*" = {
           xkb_layout = "dk";
@@ -38,11 +39,14 @@
       };
       bars = [];
       startup = [
+         { command = "swaylock"; }
          { command = "waybar"; }
+         { command = "mako"; }
          {
            command = ''sh -c "pkill -x kanshi 2>/dev/null || true; exec kanshi'';
            always = true;
          }
+         { command = "swaymsg workspace 3"; }
       ];
       gaps = {
         inner = 10;
@@ -69,6 +73,8 @@
       bindsym XF86AudioRaiseVolume exec pamixer -i 5
       bindsym XF86AudioLowerVolume exec pamixer -d 5
       bindsym XF86AudioMute exec pamixer -t
+
+      bindsym Mod4+Shift+t exec ~/.local/bin/theme-switcher.sh
     '';
   };
 }

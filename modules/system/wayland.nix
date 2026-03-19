@@ -1,17 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  services = {
-    xserver = {
-      enable = false;
-      xkb = {
-         layout = "dk";
-         variant = "";
-      };
-      displayManager = {
-         startx.enable = true;
-         gdm.enable = true;
-      };
+  services.xserver = {
+    enable = false;
+    xkb = {
+      layout = "dk";
+      variant = "";
     };
   };
 

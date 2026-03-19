@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, ... }:
+{ ... }:
 
 {
   programs.alacritty = {

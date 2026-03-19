@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   waybarConfig = {
     layer = "top";
@@ -54,9 +54,11 @@ let
     };
 
     battery = {
-      format = "{icon} {capacity}%";
-      format-charging = " {capacity}%";
-      format-icons = [ "" "" "" "" "" ];
+      format = "{icon} {capacity}% ({time})";
+      format-charging = "󰂄 {capacity}% ({time})";
+      format-full = "{icon} {capacity}%";
+      format-time = "{H}h{M}m";
+      format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
     };
 
     memory = {
@@ -96,15 +98,8 @@ in {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
-    settings = [ waybarConfig ];  # <- this applies your config
-    style = waybarStyle;          # <- this applies your CSS
+    settings = [ waybarConfig ];
+    style = waybarStyle;
   };
-
-  home.packages = with pkgs; [
-    networkmanager_dmenu
-    networkmanager
-    pulseaudio
-    acpi
-  ];
 }
 

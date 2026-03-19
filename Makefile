@@ -10,7 +10,7 @@ setup-flakes:  ## setup flakes in the current shell
 
 .PHONY: setup-home-manager
 setup-home-manager:  ## install home-manager
-	nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
+	nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz home-manager
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 

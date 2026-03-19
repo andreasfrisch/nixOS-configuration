@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   theme = ./zsh-themes/frisch.zsh-theme;
@@ -13,6 +13,15 @@ in {
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    history = {
+      size = 50000;
+      save = 50000;
+      extended = true;   # save timestamps — makes format more resilient
+      share = true;      # share history across terminals
+      ignoreDups = true;
+      expireDuplicatesFirst = true;
+    };
 
     oh-my-zsh = {
       enable = true;
