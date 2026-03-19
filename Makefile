@@ -36,4 +36,15 @@ init: setup-hardware-config setup-flakes setup-home-manager system home  ## setu
 
 .PHONY: help
 help: ## Shows this list
-	@grep -F -h "##" $(MAKEFILE_LIST) | sed -e 's/\(\:.*\#\#\)/\:\ /' | grep -F -v grep -F | sed -e 's/\\$$//' | sed -e 's/##//'
+        @grep -F -h "##" $(MAKEFILE_LIST) | sed -e 's/\(\:.*\#\#\)/\:\ /' | grep -F -v grep -F | sed -e 's/\\$$//' | sed -e 's/##//'
+
+HOST ?= castitas
+
+.PHONY: install
+install:  ## install NixOS on a new machine (usage: make install TARGET=root@<ip> HOST=castitas)
+        @[[ -n "$(TARGET)" ]] || { echo "ERROR: TARGET is required. Usage: make install TARGET=root@<ip>"; exit 1; }
+        @bash ./scripts/install.sh --host $(HOST) --target $(TARGET)
+
+.PHONY: secrets
+secrets:  ## fetch password from 1Password and encrypt secrets (usage: make secrets HOST=castitas)
+        @bash ./scripts/secrets-update.sh --host $(HOST)

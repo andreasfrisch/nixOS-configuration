@@ -23,6 +23,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
+    hashedPasswordFile = "/run/secrets/user/hashedPassword";
     extraGroups = [
       "networkmanager"
       "wheel"

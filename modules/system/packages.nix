@@ -21,5 +21,10 @@
 
     # App launcher (system-level, used by greetd session too)
     wofi
+
+    # Secrets management
+    age
+    sops
+    _1password-cli
   ];
 }

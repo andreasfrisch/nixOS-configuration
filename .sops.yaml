@@ -1,0 +1,13 @@
+# sops configuration
+# Each host entry is keyed to that machine's SSH host key (converted to age).
+# Add new hosts by running: make secrets-add-host HOST=<hostname> TARGET=root@<ip>
+
+keys:
+  # castitas — derive from: ssh-to-age < /etc/ssh/ssh_host_ed25519_key.pub
+  - &castitas age1CASTITAS_REPLACE_WITH_AGE_PUBKEY
+
+creation_rules:
+  - path_regex: secrets/castitas\.yaml$
+    key_groups:
+      - age:
+          - *castitas

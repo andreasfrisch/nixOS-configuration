@@ -2,9 +2,7 @@
    description = "NixOS + Homemanager";
 
    inputs = {
-      nixpkgs = {
-         url = "github:NixOS/nixpkgs/nixos-25.11";
-      };
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
       home-manager = {
          url = "github:nix-community/home-manager/release-25.11";
          inputs.nixpkgs.follows = "nixpkgs";
@@ -17,65 +15,94 @@
         url = "github:nix-community/nix-vscode-extensions";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      sops-nix = {
+        url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      disko = {
+        url = "github:nix-community/disko";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
    };
 
-   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, ...}:
+   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, sops-nix, disko, ... }:
      let
-        systemSettings = {
-           system = "x86_64-linux";
-           hostname = "castitas";
-           timezone = "Europe/Copenhagen";
-           defaultLocale = "en_GB.UTF-8";
-           secondaryLocale = "da_DK.UTF-8";
-        };
+        lib = nixpkgs.lib;
+
+        # Shared user settings — override per host if needed
         userSettings = {
            username = "frisch";
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
-           theme = "pinkish"; # options: gruvbox, solarized, pinkish (see /themes)
-           wm = "sway"; # options: sway
-           browser = "firefox"; # options: chromium, firefox
+           theme = "pinkish";
+           wm = "sway";
+           browser = "firefox";
            terminal = "alacritty";
            editor = "vim";
            font = "JetBrainsMono Nerd Font";
-           fontPkg = pkgs.nerd-fonts.jetbrains-mono;
            iconTheme = "Papirus";
            templateRepository = "andreasfrisch/nix-environments";
         };
 
-        lib = nixpkgs.lib;
-        pkgs = import nixpkgs {
-          system = systemSettings.system;
-          config = {
-            allowUnfree = true;
+        mkHost = { hostname, system, extraModules ? [] }:
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [ nix-vscode-extensions.overlays.default ];
+            };
+            systemSettings = {
+              inherit hostname system;
+              timezone = "Europe/Copenhagen";
+              defaultLocale = "en_GB.UTF-8";
+              secondaryLocale = "da_DK.UTF-8";
+            };
+          in lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./hosts/${hostname}/default.nix
+              sops-nix.nixosModules.sops
+              disko.nixosModules.disko
+              {
+                nixpkgs.config.allowUnfree = true;
+                nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+              }
+            ] ++ extraModules;
+            specialArgs = {
+              inherit systemSettings userSettings;
+              fontPkg = pkgs.nerd-fonts.jetbrains-mono;
+            };
           };
-          overlays = [ nix-vscode-extensions.overlays.default ];
-        };
+
+        mkHome = { system, username ? userSettings.username }:
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [ nix-vscode-extensions.overlays.default ];
+            };
+          in home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home.nix ];
+            extraSpecialArgs = {
+              inherit userSettings stylix;
+              systemSettings = { inherit system; };
+              fontPkg = pkgs.nerd-fonts.jetbrains-mono;
+            };
+          };
+
      in {
-     nixosConfigurations = {
-        castitas = lib.nixosSystem {
-           system = systemSettings.system;
-           modules = [
-             ./configuration.nix
-           ];
-           specialArgs = {
-              inherit systemSettings;
-              inherit userSettings;
-           };
+        nixosConfigurations = {
+          castitas = mkHost {
+            hostname = "castitas";
+            system = "x86_64-linux";
+          };
+        };
+
+        homeConfigurations = {
+          ${userSettings.username} = mkHome {
+            system = "x86_64-linux";
+          };
         };
      };
-    homeConfigurations = {
-       frisch = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home.nix
-          ];
-          extraSpecialArgs = {
-             inherit systemSettings;
-             inherit userSettings;
-             inherit stylix;
-          };
-       };
-    };
-  };
 }
