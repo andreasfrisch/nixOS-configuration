@@ -1,4 +1,4 @@
-{ pkgs, config, stylix, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 let
   themePath = ../../themes/${userSettings.theme};

@@ -19,7 +19,7 @@
       };
    };
 
-   outputs = { self, nixpkgs, home-manager, stylix, nix-vscode-extensions, ...}:
+   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, ...}:
      let
         systemSettings = {
            system = "x86_64-linux";
@@ -39,7 +39,6 @@
            editor = "vim";
            font = "JetBrainsMono Nerd Font";
            fontPkg = pkgs.nerd-fonts.jetbrains-mono;
-           iconTheme = "Papirus";
            templateRepository = "andreasfrisch/nix-environments";
         };
 

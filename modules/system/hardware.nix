@@ -1,6 +1,11 @@
 { lib, pkgs, ... }:
 
 {
+  # Hibernate via swapfile
+  swapDevices = [{ device = "/swapfile"; }];
+  boot.resumeDevice = "/dev/disk/by-uuid/c00ed73b-21ed-4ba7-ba9e-90a0885b1ff9";
+  boot.kernelParams = [ "resume_offset=28878848" ];
+
   # Wayland / sway requirements
   security.polkit.enable = true;
   hardware.graphics.enable = true;
