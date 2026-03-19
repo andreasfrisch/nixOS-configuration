@@ -1,28 +1,38 @@
-{ config, pkgs, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    chromium
-    gnumake
-    wget
-    neofetch
-    htop
-    jq
-    imagemagick
-    curl
-    kubectl
-    gimp3
-    feh
-    podman
-    firefox
-    eas-cli
-    slack
-    discord
+    # Fonts
+    userSettings.fontPkg
+
+    # Desktop utilities
+    hicolor-icon-theme
+    networkmanager_dmenu
+    papirus-icon-theme
+    wl-clipboard
+
+    # Applications
     cage
-    openscad
-    uv
+    chromium # keep as backup browser
+    curl
+    discord
+    eas-cli
+    feh
+    firefox
+    gimp3
+    gnumake
+    htop
+    imagemagick
+    jq
+    kubectl
     mupdf
+    neofetch
+    openscad
+    podman
+    slack
+    uv
+    wget
   ];
 }

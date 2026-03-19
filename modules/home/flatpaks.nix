@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let
   flatpak = "${pkgs.flatpak}/bin/flatpak";
@@ -9,6 +9,7 @@ let
     "com.bambulab.BambuStudio"
     "com.usebottles.bottles"
     "net.openra.OpenRA"
+    "com.spotify.Client"
   ];
 
   # Function to generate installation commands

@@ -14,7 +14,6 @@ in
     image = wallpaper;
 
     targets = {
-      rofi.enable = true;
       alacritty.enable = true;
       waybar.enable = true;
       swaylock.enable = true;
@@ -39,7 +38,7 @@ in
         name = userSettings.font;
       };
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
     };

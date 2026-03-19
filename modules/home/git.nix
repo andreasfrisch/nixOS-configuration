@@ -1,22 +1,20 @@
-{ config, pkgs, ... }:
+{ userSettings, ... }:
 
 {
   programs.git = {
     enable = true;
 
-    userName = "Andreas Frisch";
-    userEmail = "andreas.frisch@gmail.com";
-
-    extraConfig = {
+    settings = {
+      user.name = userSettings.name;
+      user.email = userSettings.email;
       init.defaultBranch = "main";
-      core.editor = "vim";
-    };
-
-    aliases = {
-      co = "checkout";
-      st = "status";
-      cm = "commit -m";
-      lg = "log --oneline --graph -- decorate";
+      core.editor = userSettings.editor;
+      alias = {
+        co = "checkout";
+        st = "status";
+        cm = "commit -m";
+        lg = "log --oneline --graph --decorate";
+      };
     };
   };
 }

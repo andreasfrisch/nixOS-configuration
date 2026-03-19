@@ -3,14 +3,14 @@
 
    inputs = {
       nixpkgs = {
-         url = "github:NixOS/nixpkgs/nixos-25.05";
+         url = "github:NixOS/nixpkgs/nixos-25.11";
       };
       home-manager = {
-         url = "github:nix-community/home-manager/release-25.05";
+         url = "github:nix-community/home-manager/release-25.11";
          inputs.nixpkgs.follows = "nixpkgs";
       };
       stylix = {
-        url = "github:danth/stylix/release-25.05";
+        url = "github:danth/stylix/release-25.11";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-vscode-extensions = {
@@ -25,18 +25,21 @@
            system = "x86_64-linux";
            hostname = "castitas";
            timezone = "Europe/Copenhagen";
-           defaultLocale = "en_GB.utf-8";
-           secondaryLocale = "da_DK.utf-8";
+           defaultLocale = "en_GB.UTF-8";
+           secondaryLocale = "da_DK.UTF-8";
         };
         userSettings = {
            username = "frisch";
-           theme = "gruvbox"; # options: gruvbox, solarized, pinkish (see /themes)
+           name = "Andreas Frisch";
+           email = "andreas.frisch@gmail.com";
+           theme = "pinkish"; # options: gruvbox, solarized, pinkish (see /themes)
            wm = "sway"; # options: sway
-           browser = "chromium"; # options: chromium
+           browser = "firefox"; # options: chromium, firefox
            terminal = "alacritty";
            editor = "vim";
            font = "JetBrainsMono Nerd Font";
            fontPkg = pkgs.nerd-fonts.jetbrains-mono;
+           iconTheme = "Papirus";
            templateRepository = "andreasfrisch/nix-environments";
         };
 

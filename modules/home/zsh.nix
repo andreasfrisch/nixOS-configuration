@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   theme = ./zsh-themes/frisch.zsh-theme;
