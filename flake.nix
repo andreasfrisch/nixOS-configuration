@@ -15,26 +15,28 @@
         url = "github:nix-community/nix-vscode-extensions";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      sops-nix = {
-        url = "github:Mic92/sops-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
       disko = {
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+      sops-nix.url = "github:Mic92/sops-nix";
    };
 
-   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, sops-nix, disko, ... }:
+   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, ... }:
      let
         lib = nixpkgs.lib;
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
 
         # Shared user settings — override per host if needed
         userSettings = {
            username = "frisch";
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
-           theme = "pinkish";
+           theme = "gruvbox";
            wm = "sway";
            browser = "firefox";
            terminal = "alacritty";
@@ -42,15 +44,11 @@
            font = "JetBrainsMono Nerd Font";
            iconTheme = "Papirus";
            templateRepository = "andreasfrisch/nix-environments";
+           fontPkg = pkgs.nerd-fonts.jetbrains-mono;
         };
 
         mkHost = { hostname, system, extraModules ? [] }:
           let
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-              overlays = [ nix-vscode-extensions.overlays.default ];
-            };
             systemSettings = {
               inherit hostname system;
               timezone = "Europe/Copenhagen";
@@ -61,8 +59,8 @@
             inherit system;
             modules = [
               ./hosts/${hostname}/default.nix
-              sops-nix.nixosModules.sops
               disko.nixosModules.disko
+              sops-nix.nixosModules.sops
               {
                 nixpkgs.config.allowUnfree = true;
                 nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
@@ -70,7 +68,6 @@
             ] ++ extraModules;
             specialArgs = {
               inherit systemSettings userSettings;
-              fontPkg = pkgs.nerd-fonts.jetbrains-mono;
             };
           };
 
@@ -87,7 +84,6 @@
             extraSpecialArgs = {
               inherit userSettings stylix;
               systemSettings = { inherit system; };
-              fontPkg = pkgs.nerd-fonts.jetbrains-mono;
             };
           };
 
@@ -96,6 +92,7 @@
           castitas = mkHost {
             hostname = "castitas";
             system = "x86_64-linux";
+            extraModules = [ nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen ];
           };
         };
 

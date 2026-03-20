@@ -2,11 +2,16 @@
 
 {
   sops = {
+    # Personal age key — place at this path on every machine (readable by root).
+    # Generate once: make secrets-init
+    # Store private key in 1Password, public key goes in .sops.yaml.
+    age.keyFile = "/etc/sops/age/keys.txt";
+
     defaultSopsFile = ../../secrets/castitas.yaml;
-    defaultSopsFormat = "yaml";
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
     secrets."user/hashedPassword" = {
       neededForUsers = true;
     };
   };
 }
+

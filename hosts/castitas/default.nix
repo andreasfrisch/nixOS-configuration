@@ -4,7 +4,7 @@
   imports = [
     ./disk.nix
     ./sops.nix
-    ../../hardware-configuration.nix
+    ./hardware-configuration.nix
     ../../modules/system/nix.nix
     ../../modules/system/hardware.nix
     ../../modules/system/audio.nix

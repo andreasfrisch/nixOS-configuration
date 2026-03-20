@@ -1,4 +1,4 @@
-{ pkgs, userSettings, fontPkg, ... }:
+{ pkgs, userSettings, ... }:
 
 let
   themePath = ../../themes/${userSettings.theme};
@@ -26,15 +26,15 @@ in
 
     fonts = {
       monospace = {
-        package = fontPkg;
+        package = userSettings.fontPkg;
         name = userSettings.font;
       };
       sansSerif = {
-        package = fontPkg;
+        package = userSettings.fontPkg;
         name = userSettings.font;
       };
       serif = {
-        package = fontPkg;
+        package = userSettings.fontPkg;
         name = userSettings.font;
       };
       emoji = {

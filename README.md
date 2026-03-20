@@ -30,24 +30,58 @@ Then set the `theme` variable in `flake.nix` to the name of the folder.
 
 ## Installing on a new machine
 
-Boot the target machine from a NixOS USB ISO and note its IP address.
-From this machine run:
+Boot the target machine from a NixOS USB ISO. Then, on the live USB:
 
+**1. Get a shell with the required tools**
 ```bash
-make secrets HOST=castitas          # fetch password from 1Password, encrypt
-make install TARGET=root@<ip>       # partition disk, install NixOS, inject secrets
+nix-shell -p git
 ```
 
-The machine will reboot into a fully configured system — no further steps needed.
+**2. Clone this repository**
+```bash
+git clone https://github.com/andreasfrisch/nixOS-configuration ~/.dotfiles
+cd ~/.dotfiles
+```
 
-To add a new host, create `hosts/<hostname>/default.nix`, `disk.nix`, and `sops.nix`,
-add it to `nixosConfigurations` in `flake.nix` and `.sops.yaml`, then run the above.
+**3. Partition and format the disk**
 
-## Secrets
+Disko handles partitioning declaratively. Run it against the host config:
+```bash
+sudo nix run github:nix-community/disko -- --mode disko --flake .#castitas
+```
+This creates the EFI partition, swap, and root filesystem as defined in `hosts/castitas/disk.nix`.
 
-Passwords are managed with [sops-nix](https://github.com/Mic92/sops-nix).
-Each host has an encrypted `secrets/<hostname>.yaml` keyed to its SSH host key.
-`make secrets HOST=<hostname>` fetches the password from 1Password and re-encrypts it.
+**4. Update the hardware configuration**
+
+Generate the hardware config for this specific machine and copy it into the host folder:
+```bash
+sudo nixos-generate-config --root /mnt --no-filesystems
+cp /mnt/etc/nixos/hardware-configuration.nix ~/.dotfiles/hosts/castitas/hardware-configuration.nix
+```
+The `--no-filesystems` flag skips filesystem entries since disko already handles those.
+
+**5. Install NixOS**
+```bash
+sudo nixos-install --flake ~/.dotfiles#castitas
+```
+
+**6. Set the user password**
+```bash
+sudo nixos-enter --root /mnt -c 'passwd frisch'
+```
+
+**7. Reboot**
+```bash
+reboot
+```
+
+**8. Apply home-manager config**
+
+After logging in for the first time:
+```bash
+cd ~/.dotfiles
+make home
+```
 Encrypted secrets are safe to commit to git.
 
 

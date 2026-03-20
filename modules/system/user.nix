@@ -18,12 +18,16 @@
   # dconf needed for GTK apps
   programs.dconf.enable = true;
 
+  # NixOS owns /etc/shadow — passwords come exclusively from hashedPasswordFile
+  users.mutableUsers = false;
+
   # User account
+  users.users.root.hashedPassword = "!"; # locked — sudo only
   users.groups.bluetooth = {};
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;
-    hashedPasswordFile = "/run/secrets/user/hashedPassword";
+    hashedPasswordFile = "/run/secrets-for-users/user/hashedPassword";
     extraGroups = [
       "networkmanager"
       "wheel"
