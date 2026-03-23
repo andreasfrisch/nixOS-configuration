@@ -43,7 +43,14 @@ git clone https://github.com/andreasfrisch/nixOS-configuration ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-**3. Partition and format the disk**
+**3. Install the age key**
+
+Retrieve your personal age key from 1Password and install it so sops can decrypt secrets during the NixOS install:
+```bash
+make secrets-install-key
+```
+
+**4. Partition and format the disk**
 
 Disko handles partitioning declaratively. Run it against the host config:
 ```bash
@@ -51,7 +58,7 @@ sudo nix run github:nix-community/disko -- --mode disko --flake .#castitas
 ```
 This creates the EFI partition, swap, and root filesystem as defined in `hosts/castitas/disk.nix`.
 
-**4. Update the hardware configuration**
+**5. Update the hardware configuration**
 
 Generate the hardware config for this specific machine and copy it into the host folder:
 ```bash
@@ -60,28 +67,24 @@ cp /mnt/etc/nixos/hardware-configuration.nix ~/.dotfiles/hosts/castitas/hardware
 ```
 The `--no-filesystems` flag skips filesystem entries since disko already handles those.
 
-**5. Install NixOS**
+**6. Install NixOS**
 ```bash
 sudo nixos-install --flake ~/.dotfiles#castitas
 ```
-
-**6. Set the user password**
-```bash
-sudo nixos-enter --root /mnt -c 'passwd frisch'
-```
+The user password is set from the encrypted secret in `secrets/castitas.yaml` — no manual `passwd` needed.
 
 **7. Reboot**
 ```bash
 reboot
 ```
 
-**8. Apply home-manager config**
+**8. Install home-manager and apply home config**
 
 After logging in for the first time:
 ```bash
 cd ~/.dotfiles
+make setup-home-manager
 make home
 ```
-Encrypted secrets are safe to commit to git.
 
 
