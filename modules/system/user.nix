@@ -2,7 +2,6 @@
 
 {
   # Allow unfree packages (system-level)
-  nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
     "vscode-extension-github-copilot"

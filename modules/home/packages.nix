@@ -1,8 +1,6 @@
 { pkgs, userSettings, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
     # Fonts
     userSettings.fontPkg

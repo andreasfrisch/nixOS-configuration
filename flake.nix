@@ -62,7 +62,6 @@
               disko.nixosModules.disko
               sops-nix.nixosModules.sops
               {
-                nixpkgs.config.allowUnfree = true;
                 nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
               }
             ] ++ extraModules;
