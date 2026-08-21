@@ -28,7 +28,7 @@ let
       sleep 0.1
       choice=$(${fuzzelCmd} <<< $'${actions}')
       case "$choice" in
-        "${actionLock}") swaylock ;;
+        "${actionLock}") noctalia lock ;;
         "${actionSleep}") systemctl suspend ;;
         "${actionHibernate}") systemctl hibernate ;;
         "${actionReboot}") systemctl reboot ;;

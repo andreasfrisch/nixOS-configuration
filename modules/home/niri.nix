@@ -16,20 +16,6 @@
       kanshi
     ];
 
-    programs.swaylock = {
-      enable = true;
-      package = pkgs.swaylock-effects;
-      settings = {
-        image = config.stylix.image;
-        clock = true;
-        indicator-idle-visible = true;
-        indicator-radius = 100;
-        indicator-thickness = 7;
-        timestr = "%H:%M";
-        datestr = "%d %B";
-      };
-    };
-
     home.file.".config/niri/config.kdl".text = ''
       input {
           keyboard {
@@ -46,15 +32,21 @@
 
       layout {
           gaps 10
+          focus-ring {
+              width 2
+          }
       }
 
-      spawn-at-startup "swaylock"
-        spawn-at-startup "noctalia"
+      prefer-no-csd
+
+      workspaces "1" "2" "3" "4" "5" "6" "7" "8" "9"
+
+      spawn-at-startup "noctalia"
       spawn-sh-at-startup "pkill -x kanshi 2>/dev/null || true; exec kanshi"
 
       binds {
           Mod+D { spawn "fuzzel"; }
-          Mod+L { spawn "swaylock"; }
+          Mod+L { spawn "noctalia lock"; }
           Mod+Shift+L { spawn "sh" "-lc" "~/.local/bin/power-menu.sh"; }
           Mod+Shift+T { spawn "sh" "-lc" "~/.local/bin/theme-switcher.sh"; }
 
@@ -79,15 +71,15 @@
           Mod+8 { focus-workspace 8; }
           Mod+9 { focus-workspace 9; }
 
-          Mod+Ctrl+1 { move-column-to-workspace 1; }
-          Mod+Ctrl+2 { move-column-to-workspace 2; }
-          Mod+Ctrl+3 { move-column-to-workspace 3; }
-          Mod+Ctrl+4 { move-column-to-workspace 4; }
-          Mod+Ctrl+5 { move-column-to-workspace 5; }
-          Mod+Ctrl+6 { move-column-to-workspace 6; }
-          Mod+Ctrl+7 { move-column-to-workspace 7; }
-          Mod+Ctrl+8 { move-column-to-workspace 8; }
-          Mod+Ctrl+9 { move-column-to-workspace 9; }
+          Mod+Shift+1 { move-column-to-workspace 1; }
+          Mod+Shift+2 { move-column-to-workspace 2; }
+          Mod+Shift+3 { move-column-to-workspace 3; }
+          Mod+Shift+4 { move-column-to-workspace 4; }
+          Mod+Shift+5 { move-column-to-workspace 5; }
+          Mod+Shift+6 { move-column-to-workspace 6; }
+          Mod+Shift+7 { move-column-to-workspace 7; }
+          Mod+Shift+8 { move-column-to-workspace 8; }
+          Mod+Shift+9 { move-column-to-workspace 9; }
       }
     '';
   };

@@ -41,7 +41,7 @@
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
            theme = "gruvbox";
-            wm = "niri";
+           wm = "niri";
            browser = "firefox";
            terminal = "alacritty";
            editor = "vim";

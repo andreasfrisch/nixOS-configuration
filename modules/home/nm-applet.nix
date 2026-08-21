@@ -11,7 +11,7 @@
     Service = {
       ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
       Restart = "on-failure";
-      Environment = "XDG_CURRENT_DESKTOP=sway";
+      Environment = "XDG_CURRENT_DESKTOP=niri";
     };
     Install = {
       WantedBy = [ "graphical-session.target" ];

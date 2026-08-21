@@ -15,7 +15,6 @@ in
 
     targets = {
       alacritty.enable = true;
-      swaylock.enable = true;
       gtk.enable = true;
     };
 
@@ -43,19 +42,5 @@ in
     };
   };
 
-  home.packages = if userSettings.wm == "sway" then [ pkgs.swaybg ] else [ ];
-
-  systemd.user.services.set-wallpaper = lib.mkIf (userSettings.wm == "sway") {
-    Unit = {
-      Description = "Set wallpaper using swaybg";
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${wallpaper} -m fill";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-  };
+  home.packages = [ ];
 }
