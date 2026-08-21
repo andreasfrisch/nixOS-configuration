@@ -1,4 +1,4 @@
-{ pkgs, userSettings, ... }:
+{ lib, pkgs, userSettings, ... }:
 
 let
   themePath = ../../themes/${userSettings.theme};
@@ -45,7 +45,7 @@ in
 
   home.packages = if userSettings.wm == "sway" then [ pkgs.swaybg ] else [ ];
 
-  systemd.user.services.set-wallpaper = if userSettings.wm == "sway" then {
+  systemd.user.services.set-wallpaper = lib.mkIf (userSettings.wm == "sway") {
     Unit = {
       Description = "Set wallpaper using swaybg";
       PartOf = [ "graphical-session.target" ];
@@ -56,13 +56,6 @@ in
     };
     Install = {
       WantedBy = [ "default.target" ];
-    };
-  } else {
-    Unit = {
-      Description = "Disabled under Niri/Noctalia";
-    };
-    Service = {
-      ExecStart = "${pkgs.coreutils}/bin/true";
     };
   };
 }
