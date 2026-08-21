@@ -7,6 +7,10 @@
     "vscode-extension-github-copilot"
     "vscode-extension-github-copilot-chat"
     "vscode-extension-ms-python-vscode-pylance"
+    "steam"
+    "steam-original"
+    "steam-unwrapped"
+    "steam-run"
   ];
 
   # Default shell
