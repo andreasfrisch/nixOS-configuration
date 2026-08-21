@@ -3,6 +3,7 @@
 {
   # Allow unfree packages (system-level)
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "1password-cli"
     "vscode"
     "vscode-extension-github-copilot"
     "vscode-extension-github-copilot-chat"
