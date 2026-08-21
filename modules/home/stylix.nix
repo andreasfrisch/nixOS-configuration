@@ -15,7 +15,6 @@ in
 
     targets = {
       alacritty.enable = true;
-      waybar.enable = true;
       swaylock.enable = true;
       gtk.enable = true;
     };
@@ -44,9 +43,9 @@ in
     };
   };
 
-  # Set swaybg wallpaper (see later)
-  home.packages = [ pkgs.swaybg ];
-  systemd.user.services.set-wallpaper = {
+  home.packages = if userSettings.wm == "sway" then [ pkgs.swaybg ] else [ ];
+
+  systemd.user.services.set-wallpaper = if userSettings.wm == "sway" then {
     Unit = {
       Description = "Set wallpaper using swaybg";
       PartOf = [ "graphical-session.target" ];
@@ -57,6 +56,13 @@ in
     };
     Install = {
       WantedBy = [ "default.target" ];
+    };
+  } else {
+    Unit = {
+      Description = "Disabled under Niri/Noctalia";
+    };
+    Service = {
+      ExecStart = "${pkgs.coreutils}/bin/true";
     };
   };
 }

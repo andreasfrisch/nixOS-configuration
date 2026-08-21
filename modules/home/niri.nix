@@ -49,6 +49,7 @@
       }
 
       spawn-at-startup "swaylock"
+        spawn-at-startup "noctalia"
       spawn-sh-at-startup "pkill -x kanshi 2>/dev/null || true; exec kanshi"
 
       binds {

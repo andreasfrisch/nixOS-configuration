@@ -12,18 +12,15 @@
     ./modules/home/vim.nix
     ./modules/home/zsh.nix
     ./modules/home/alacritty.nix
-    ./modules/home/sway.nix
     ./modules/home/niri.nix
     ./modules/home/noctalia.nix
     ./modules/home/git.nix
-    ./modules/home/waybar.nix
     ./modules/home/packages.nix
     ./modules/home/setupenv.nix
     ./modules/home/flatpaks.nix
     ./modules/home/kanshi.nix
     ./modules/home/vscode.nix
     ./modules/home/battery-warning.nix
-    ./modules/home/mako.nix
     ./modules/home/nm-applet.nix
     ./modules/home/desktop.nix
   ];
