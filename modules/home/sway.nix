@@ -1,6 +1,6 @@
-{ config, pkgs, userSettings, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
-{
+lib.mkIf (userSettings.wm == "sway") {
   imports = [
     ./scripts/power-menu.nix
     ./scripts/theme-switcher.nix

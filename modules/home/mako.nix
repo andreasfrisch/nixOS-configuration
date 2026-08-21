@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ lib, userSettings, ... }:
 
-{
+lib.mkIf (userSettings.wm == "sway") {
   services.mako = {
     enable = true;
 

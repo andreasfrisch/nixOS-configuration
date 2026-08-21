@@ -21,9 +21,13 @@
       };
       nixos-hardware.url = "github:NixOS/nixos-hardware/master";
       sops-nix.url = "github:Mic92/sops-nix";
+      noctalia = {
+        url = "github:noctalia-dev/noctalia";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
    };
 
-   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, ... }:
+   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, noctalia, ... }:
      let
         lib = nixpkgs.lib;
         pkgs = import nixpkgs {
@@ -37,7 +41,7 @@
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
            theme = "gruvbox";
-           wm = "sway";
+            wm = "niri";
            browser = "firefox";
            terminal = "alacritty";
            editor = "vim";
@@ -81,7 +85,10 @@
             };
           in home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home.nix ];
+            modules = [
+              noctalia.homeModules.default
+              ./home.nix
+            ];
             extraSpecialArgs = {
               inherit userSettings stylix;
               systemSettings = { inherit system; };

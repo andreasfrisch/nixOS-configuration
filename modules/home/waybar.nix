@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, userSettings, ... }:
 let
   waybarConfig = {
     layer = "top";
@@ -94,7 +94,7 @@ let
       margin-right: 5px;
     }
   '';
-in {
+in lib.mkIf (userSettings.wm == "sway") {
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
