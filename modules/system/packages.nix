@@ -21,5 +21,13 @@
 
     # App launcher (system-level, used by greetd session too)
     wofi
+
+    # 1Password CLI
+    _1password-cli
+
+    # Secrets management
+    age
+    sops
+    mkpasswd
   ];
 }
