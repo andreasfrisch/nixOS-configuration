@@ -39,7 +39,15 @@
 
       prefer-no-csd
 
-      workspaces "1" "2" "3" "4" "5" "6" "7" "8" "9"
+      workspace "1"
+      workspace "2"
+      workspace "3"
+      workspace "4"
+      workspace "5"
+      workspace "6"
+      workspace "7"
+      workspace "8"
+      workspace "9"
 
       spawn-at-startup "noctalia"
       spawn-sh-at-startup "pkill -x kanshi 2>/dev/null || true; exec kanshi"
