@@ -1,10 +1,12 @@
 { config, lib, pkgs, userSettings, ... }:
 
-lib.mkIf (userSettings.wm == "sway") {
+{
   imports = [
     ./scripts/power-menu.nix
     ./scripts/theme-switcher.nix
   ];
+
+  config = lib.mkIf (userSettings.wm == "sway") {
 
   home.packages = with pkgs; [
     shotman
@@ -76,5 +78,6 @@ lib.mkIf (userSettings.wm == "sway") {
 
       bindsym Mod4+Shift+t exec ~/.local/bin/theme-switcher.sh
     '';
+  };
   };
 }

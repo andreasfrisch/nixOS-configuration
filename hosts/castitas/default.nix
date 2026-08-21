@@ -15,6 +15,7 @@
     ../../modules/system/flatpak.nix
     ../../modules/system/packages.nix
     ../../modules/system/regreet.nix
+    ../../modules/system/niri.nix
     ../../modules/system/wayland.nix
     ../../modules/system/gaming.nix
   ];

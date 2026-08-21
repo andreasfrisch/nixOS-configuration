@@ -13,6 +13,8 @@
     ./modules/home/zsh.nix
     ./modules/home/alacritty.nix
     ./modules/home/sway.nix
+    ./modules/home/niri.nix
+    ./modules/home/noctalia.nix
     ./modules/home/git.nix
     ./modules/home/waybar.nix
     ./modules/home/packages.nix
