@@ -30,6 +30,17 @@
           }
       }
 
+      layout {
+          gaps 10
+          focus-ring {
+              width 2
+          }
+      }
+
+      prefer-no-csd
+
+      workspaces "1" "2" "3" "4" "5" "6" "7" "8" "9"
+
       spawn-at-startup "noctalia"
       spawn-sh-at-startup "pkill -x kanshi 2>/dev/null || true; exec kanshi"
 
