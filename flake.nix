@@ -75,7 +75,9 @@
             pkgs = import nixpkgs {
               inherit system;
               config.allowUnfree = true;
-              overlays = [ nix-vscode-extensions.overlays.default ];
+              overlays = [
+                nix-vscode-extensions.overlays.default
+              ];
             };
           in home-manager.lib.homeManagerConfiguration {
             inherit pkgs;

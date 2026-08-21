@@ -19,18 +19,24 @@
     eas-cli
     feh
     firefox
+    freecad
     gimp3
     gnumake
     htop
     imagemagick
+    inkscape
     jq
+    k9s
     kubectl
     mupdf
     neofetch
+    opencode
     openscad
     podman
     slack
     uv
+    unzip
+    vassal
     wget
   ];
 }
