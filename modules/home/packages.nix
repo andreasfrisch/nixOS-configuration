@@ -35,10 +35,10 @@
     k9s
     kubectl
     mupdf
-    neofetch
     opencode
     openscad
     podman
+    ripgrep
     slack
     uv
     unzip

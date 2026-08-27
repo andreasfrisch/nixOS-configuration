@@ -8,6 +8,7 @@ in
 {
   stylix = {
     enable = true;
+    polarity = "dark";
 
     base16Scheme = colors;
 
@@ -18,6 +19,7 @@ in
       waybar.enable = true;
       swaylock.enable = true;
       gtk.enable = true;
+      zed.enable = true;
     };
 
     opacity = {

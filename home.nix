@@ -19,6 +19,7 @@
     ./modules/home/setupenv.nix
     ./modules/home/flatpaks.nix
     ./modules/home/kanshi.nix
+    ./modules/home/zed.nix
     ./modules/home/vscode.nix
     ./modules/home/battery-warning.nix
     ./modules/home/mako.nix
@@ -35,6 +36,8 @@
   };
 
   fonts.fontconfig.enable = true;
+
+  wayland.windowManager.hyprland.configType = "lua";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

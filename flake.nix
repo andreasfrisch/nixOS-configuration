@@ -2,13 +2,14 @@
    description = "NixOS + Homemanager";
 
    inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+      nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager = {
-         url = "github:nix-community/home-manager/release-25.11";
+         url = "github:nix-community/home-manager/release-26.05";
          inputs.nixpkgs.follows = "nixpkgs";
       };
       stylix = {
-        url = "github:danth/stylix/release-25.11";
+        url = "github:danth/stylix/release-26.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-vscode-extensions = {
@@ -23,7 +24,7 @@
       sops-nix.url = "github:Mic92/sops-nix";
    };
 
-   outputs = { nixpkgs, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, ... }:
+   outputs = { nixpkgs, nixpkgs-unstable, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, ... }:
      let
         lib = nixpkgs.lib;
         pkgs = import nixpkgs {
@@ -36,7 +37,7 @@
            username = "frisch";
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
-           theme = "gruvbox";
+           theme = "pinkish";
            wm = "sway";
            browser = "firefox";
            terminal = "alacritty";
@@ -84,6 +85,10 @@
             modules = [ ./home.nix ];
             extraSpecialArgs = {
               inherit userSettings stylix;
+              pkgsUnstable = import nixpkgs-unstable {
+                inherit system;
+                config.allowUnfree = true;
+              };
               systemSettings = { inherit system; };
             };
           };

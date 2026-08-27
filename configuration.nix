@@ -16,6 +16,7 @@
     ./modules/system/containers.nix
     ./modules/system/flatpak.nix
     ./modules/system/packages.nix
+    ./modules/system/keyring.nix
     ./modules/system/regreet.nix
     ./modules/system/wayland.nix
     ./modules/system/gaming.nix
