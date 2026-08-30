@@ -5,6 +5,12 @@
     # Fonts
     userSettings.fontPkg
 
+    # Fonts for 3D-print-friendly engraved/embossed text (bold, no thin serifs)
+    montserrat
+    open-sans
+    oswald
+    roboto
+
     # Desktop utilities
     hicolor-icon-theme
     networkmanager_dmenu
