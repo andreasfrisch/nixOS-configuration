@@ -40,12 +40,6 @@
       bars = [];
       startup = [
          { command = "swaylock"; }
-         { command = "env GDK_BACKEND=wayland waybar"; }
-         { command = "mako"; }
-         {
-           command = ''sh -c "pkill -x kanshi 2>/dev/null || true; exec kanshi'';
-           always = true;
-         }
          { command = "swaymsg workspace 3"; }
       ];
       gaps = {

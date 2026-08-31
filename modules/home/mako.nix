@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   services.mako = {
@@ -28,6 +28,24 @@
         border-color = lib.mkForce "#ff0000";
         text-color = lib.mkForce "#ffffff";
       };
+    };
+  };
+
+  # Home Manager's mako module has no built-in systemd integration, unlike
+  # waybar/kanshi — so it's supervised here explicitly instead of being
+  # launched ad-hoc from sway's startup list.
+  systemd.user.services.mako = {
+    Unit = {
+      Description = "Mako notification daemon";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${config.services.mako.package}/bin/mako";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }
