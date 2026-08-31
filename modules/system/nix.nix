@@ -8,9 +8,11 @@
   #  gcc.cc.lib
   #]);
 
-  # Automatic updating
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.dates = "weekly";
+  # Automatic updating — disabled: it was configured for a flake-based
+  # system but never pointed at the flake (`system.autoUpgrade.flake` was
+  # unset), so it silently failed every week trying to fall back to
+  # legacy channel-based rebuilds. Upgrade manually via `make system`/`make home`.
+  system.autoUpgrade.enable = false;
 
   # Automatic cleanup
   nix.gc.automatic = true;
