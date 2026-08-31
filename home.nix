@@ -16,6 +16,10 @@
     ./modules/home/git.nix
     ./modules/home/waybar.nix
     ./modules/home/packages.nix
+    ./modules/home/fonts.nix
+    ./modules/home/apps-creative.nix
+    ./modules/home/apps-devops.nix
+    ./modules/home/apps-comms.nix
     ./modules/home/setupenv.nix
     ./modules/home/flatpaks.nix
     ./modules/home/kanshi.nix

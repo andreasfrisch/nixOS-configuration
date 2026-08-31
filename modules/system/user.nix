@@ -14,7 +14,6 @@
 
   # User account
   users.users.root.hashedPassword = "!"; # locked — sudo only
-  users.groups.bluetooth = {};
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = userSettings.name;

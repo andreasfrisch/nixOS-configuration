@@ -18,17 +18,7 @@ let
     ];
 
     clock = {
-      format = " {:%Y-%m-%d  %H:%M}";
-      tooltip = false;
-    };
-
-    network = {
-      interface = "wlp0s20f3";
-      format-wifi = "  {essid} ({signalStrength}%)";
-      format-ethernet = "直 {ipaddr}/{cidr}";
-      format-disconnected = "⚠️ Disconnected";
-      format-no-inet = "⚠️ No Internet";
-      on-click = "networkmanager_dmenu --dmenu wofi";
+      format = " {:%Y-%m-%d  %H:%M}";
       tooltip = false;
     };
 
