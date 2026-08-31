@@ -17,6 +17,9 @@
     papirus-icon-theme
     wl-clipboard
 
+    # Dev tooling
+    nil # Nix language server
+
     # Applications
     cage
     chromium # keep as backup browser

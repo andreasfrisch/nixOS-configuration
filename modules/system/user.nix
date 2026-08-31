@@ -1,14 +1,6 @@
-{ lib, pkgs, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 {
-  # Allow unfree packages (system-level)
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode"
-    "vscode-extension-github-copilot"
-    "vscode-extension-github-copilot-chat"
-    "vscode-extension-ms-python-vscode-pylance"
-  ];
-
   # Default shell
   environment.shells = [ pkgs.zsh ];
   programs.zsh.enable = true;

@@ -12,10 +12,6 @@
         url = "github:danth/stylix/release-26.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      nix-vscode-extensions = {
-        url = "github:nix-community/nix-vscode-extensions";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
       disko = {
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +20,7 @@
       sops-nix.url = "github:Mic92/sops-nix";
    };
 
-   outputs = { nixpkgs, nixpkgs-unstable, home-manager, stylix, nix-vscode-extensions, disko, nixos-hardware, sops-nix, ... }:
+   outputs = { nixpkgs, nixpkgs-unstable, home-manager, stylix, disko, nixos-hardware, sops-nix, ... }:
      let
         lib = nixpkgs.lib;
         pkgs = import nixpkgs {
@@ -62,9 +58,6 @@
               ./hosts/${hostname}/default.nix
               disko.nixosModules.disko
               sops-nix.nixosModules.sops
-              {
-                nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
-              }
             ] ++ extraModules;
             specialArgs = {
               inherit systemSettings userSettings;
@@ -76,9 +69,6 @@
             pkgs = import nixpkgs {
               inherit system;
               config.allowUnfree = true;
-              overlays = [
-                nix-vscode-extensions.overlays.default
-              ];
             };
           in home-manager.lib.homeManagerConfiguration {
             inherit pkgs;

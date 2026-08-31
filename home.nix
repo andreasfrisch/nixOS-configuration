@@ -20,7 +20,6 @@
     ./modules/home/flatpaks.nix
     ./modules/home/kanshi.nix
     ./modules/home/zed.nix
-    ./modules/home/vscode.nix
     ./modules/home/opencode.nix
     ./modules/home/battery-warning.nix
     ./modules/home/mako.nix
