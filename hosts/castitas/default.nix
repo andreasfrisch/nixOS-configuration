@@ -9,6 +9,7 @@
     ../../modules/system/hardware.nix
     ../../modules/system/audio.nix
     ../../modules/system/printing.nix
+    ../../modules/system/ollama.nix
     ../../modules/system/user.nix
     ../../modules/system/networking.nix
     ../../modules/system/containers.nix

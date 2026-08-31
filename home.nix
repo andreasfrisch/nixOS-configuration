@@ -21,6 +21,7 @@
     ./modules/home/kanshi.nix
     ./modules/home/zed.nix
     ./modules/home/vscode.nix
+    ./modules/home/opencode.nix
     ./modules/home/battery-warning.nix
     ./modules/home/mako.nix
     ./modules/home/nm-applet.nix
@@ -33,6 +34,13 @@
     VISUAL = userSettings.editor;
     TERM = userSettings.terminal;
     XDG_DATA_DIRS = "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share";
+
+    # Local Ollama server, exposed as an OpenAI-compatible endpoint
+    # for tools like opencode. Model must be pulled manually:
+    #   ollama pull deepseek-coder:6.7b
+    OLLAMA_HOST = "http://127.0.0.1:11434";
+    OPENAI_BASE_URL = "http://127.0.0.1:11434/v1";
+    OPENAI_API_KEY = "ollama";
   };
 
   fonts.fontconfig.enable = true;
