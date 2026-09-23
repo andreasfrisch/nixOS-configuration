@@ -3,7 +3,6 @@
 {
   imports = [
     ./disk.nix
-    ./sops.nix
     ./hardware.nix
     ./hardware-configuration.nix
     ../../modules/system/nix.nix

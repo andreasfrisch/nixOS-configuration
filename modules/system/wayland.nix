@@ -11,7 +11,6 @@
 
   environment.systemPackages = with pkgs; [
     xwayland # some apps still need this
-    wl-clipboard
     qt6.qtwayland
     glib # for GDK
   ];

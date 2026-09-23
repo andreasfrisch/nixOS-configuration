@@ -17,10 +17,9 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-      sops-nix.url = "github:Mic92/sops-nix";
    };
 
-   outputs = { nixpkgs, nixpkgs-unstable, home-manager, stylix, disko, nixos-hardware, sops-nix, ... }:
+   outputs = { nixpkgs, nixpkgs-unstable, home-manager, stylix, disko, nixos-hardware, ... }:
      let
         lib = nixpkgs.lib;
         pkgs = import nixpkgs {
@@ -57,14 +56,13 @@
             modules = [
               ./hosts/${hostname}/default.nix
               disko.nixosModules.disko
-              sops-nix.nixosModules.sops
             ] ++ extraModules;
             specialArgs = {
               inherit systemSettings userSettings;
             };
           };
 
-        mkHome = { system, username ? userSettings.username }:
+        mkHome = { hostname, system, username ? userSettings.username }:
           let
             pkgs = import nixpkgs {
               inherit system;
@@ -72,14 +70,14 @@
             };
           in home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home.nix ];
+            modules = [ ./hosts/${hostname}/home.nix ];
             extraSpecialArgs = {
               inherit userSettings stylix;
               pkgsUnstable = import nixpkgs-unstable {
                 inherit system;
                 config.allowUnfree = true;
               };
-              systemSettings = { inherit system; };
+              systemSettings = { inherit system hostname; };
             };
           };
 
@@ -93,7 +91,8 @@
         };
 
         homeConfigurations = {
-          ${userSettings.username} = mkHome {
+          "${userSettings.username}@castitas" = mkHome {
+            hostname = "castitas";
             system = "x86_64-linux";
           };
         };

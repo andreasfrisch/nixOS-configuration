@@ -1,35 +1,10 @@
-{ config, stylix, userSettings, ... }:
+{ config, userSettings, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
   home.homeDirectory = "/home/${userSettings.username}";
-
-  imports = [
-    stylix.homeModules.stylix
-    ./modules/home/stylix.nix
-    ./modules/home/vim.nix
-    ./modules/home/zsh.nix
-    ./modules/home/alacritty.nix
-    ./modules/home/sway.nix
-    ./modules/home/git.nix
-    ./modules/home/waybar.nix
-    ./modules/home/packages.nix
-    ./modules/home/fonts.nix
-    ./modules/home/apps-creative.nix
-    ./modules/home/apps-devops.nix
-    ./modules/home/apps-comms.nix
-    ./modules/home/setupenv.nix
-    ./modules/home/flatpaks.nix
-    ./modules/home/kanshi.nix
-    ./modules/home/zed.nix
-    ./modules/home/opencode.nix
-    ./modules/home/battery-warning.nix
-    ./modules/home/mako.nix
-    ./modules/home/nm-applet.nix
-    ./modules/home/desktop.nix
-  ];
 
   home.sessionVariables = {
     BROWSER = userSettings.browser;
@@ -47,8 +22,6 @@
   };
 
   fonts.fontconfig.enable = true;
-
-  wayland.windowManager.hyprland.configType = "lua";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
