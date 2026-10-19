@@ -69,6 +69,9 @@
       bindsym XF86AudioMute exec pamixer -t
 
       bindsym Mod4+Shift+t exec ~/.local/bin/theme-switcher.sh
+
+      unbindsym Mod4+v
+      bindsym Mod4+v exec sh -c 'cliphist list | fuzzel --dmenu | cliphist decode | wl-copy'
     '';
   };
 }

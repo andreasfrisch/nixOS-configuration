@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 # Shell/CLI tooling that works on any host, with or without a graphical session.
 {
@@ -9,5 +9,9 @@
     ../setupenv.nix
     ../apps-devops.nix
     ../opencode.nix
+  ];
+
+  home.packages = with pkgs; [
+    wl-clipboard
   ];
 }

@@ -7,6 +7,11 @@ in {
     eza
   ];
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
 

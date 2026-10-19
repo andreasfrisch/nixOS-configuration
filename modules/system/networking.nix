@@ -12,9 +12,16 @@
 
   services.openssh.enable = true;
 
-  # Keep running when lid is closed (useful for external monitor setups)
+  # Suspend immediately, then hibernate after an hour if still asleep. This
+  # applies both to lid-close and to the "Hibernate" power-menu action, so
+  # triggering one manually and then closing the lid doesn't restart the
+  # timer — the system is already suspended, so the lid event is a no-op.
+  systemd.sleep.settings.Sleep.HibernateDelaySec = "1h";
+
   services.logind.settings.Login = {
-    HandleLidSwitch = "ignore";
+    HandleLidSwitch = "suspend-then-hibernate";
+    # Docked/on external power: keep running when lid is closed (useful for
+    # external monitor setups).
     HandleLidSwitchDocked = "ignore";
     HandleLidSwitchExternalPower = "ignore";
   };

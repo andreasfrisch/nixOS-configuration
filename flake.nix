@@ -32,7 +32,7 @@
            username = "frisch";
            name = "Andreas Frisch";
            email = "andreas.frisch@gmail.com";
-           theme = "pinkish";
+           theme = "gruvbox";
            wm = "sway";
            browser = "firefox";
            terminal = "alacritty";
@@ -54,7 +54,7 @@
           in lib.nixosSystem {
             inherit system;
             modules = [
-              ./hosts/${hostname}/default.nix
+              ./hosts/${hostname}/system.nix
               disko.nixosModules.disko
             ] ++ extraModules;
             specialArgs = {

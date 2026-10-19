@@ -11,7 +11,6 @@ let
   # Actions
   actionLock = "${iconLock} Lock";
   actionSleep = "${iconSleep} Sleep";
-  actionHibernate = "${iconHibernate} Hibernate";
   actionPowerOff = "${iconPoweroff} Poweroff";
   actionReboot = "${iconReboot} Reboot";
 
@@ -19,7 +18,7 @@ let
   fuzzelCmd = "fuzzel --dmenu --prompt='Select: ' --lines=5 --width=20";
 
   # The actions to display in fuzzel
-  actions = "${actionLock}\\n${actionSleep}\\n${actionHibernate}\\n${actionReboot}\\n${actionPowerOff}";
+  actions = "${actionLock}\\n${actionSleep}\\n${actionReboot}\\n${actionPowerOff}";
 
   # Script contents
   script = ''
@@ -29,8 +28,7 @@ let
       choice=$(${fuzzelCmd} <<< $'${actions}')
       case "$choice" in
         "${actionLock}") swaylock ;;
-        "${actionSleep}") systemctl suspend ;;
-        "${actionHibernate}") systemctl hibernate ;;
+        "${actionSleep}") systemctl suspend-then-hibernate ;;
         "${actionReboot}") systemctl reboot ;;
         "${actionPowerOff}") systemctl poweroff ;;
       esac

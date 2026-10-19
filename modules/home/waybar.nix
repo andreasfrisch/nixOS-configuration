@@ -85,6 +85,8 @@ let
     }
   '';
 in {
+  home.packages = with pkgs; [ pavucontrol ];
+
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;

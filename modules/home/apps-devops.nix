@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    _1password-cli
     curl
     eas-cli
     gnumake
@@ -13,6 +14,7 @@
     opencode
     podman
     ripgrep
+    rpi-imager
     unzip
     uv
     wget
