@@ -6,6 +6,7 @@
     ../vim.nix
     ../zsh.nix
     ../git.nix
+    ../ssh.nix
     ../setupenv.nix
     ../apps-devops.nix
     ../opencode.nix
